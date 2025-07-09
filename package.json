@@ -1,0 +1,38 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "^6.23.3",
+    "@clerk/themes": "^2.2.54",
+    "@stripe/stripe-js": "^7.4.0",
+    "firebase": "^11.10.0",
+    "franc": "^6.2.0",
+    "howler": "^2.2.4",
+    "jspdf": "^3.0.1",
+    "next": "15.3.4",
+    "openai": "^5.8.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-speech-recognition": "^4.0.1",
+    "stripe": "^18.3.0",
+    "tesseract.js": "^6.0.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
