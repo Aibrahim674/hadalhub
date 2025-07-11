@@ -29,7 +29,7 @@ export async function POST(request: Request) {
       : 'You are a professional English-Somali translator. Translate the English text into formal Somali.';
 
     const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4-turbo',
       messages: [
         { role: 'system', content: systemPrompt },
         { role: 'user', content: input },

@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+PS C:\Users\ayyub\hadalhub\frontend> npm run dev
 
-## Getting Started
+> frontend@0.1.0 dev
+> next dev
 
-First, run the development server:
+   ▲ Next.js 15.3.4
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.61:3000
+   - Environments: .env.local
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+ ✓ Starting...
+ ✓ Ready in 2.7s
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 705ms (224 modules)
+ ⨯ [Error: Publishable key not valid.]
+ ○ Compiling /_error ...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (150kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ✓ Compiled /_error in 1484ms (367 modules)
+ GET / 404 in 57ms
+ ○ Compiling /_not-found ...
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⨯ [Error: Publishable key not valid.]
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⨯ [Error: Publishable key not valid.]
+ ✓ Compiled /_not-found in 6.7s (1394 modules)
+ ⨯ [Error: @clerk/clerk-react: The publishableKey passed to Clerk is invalid. You can get your Publishable key at https://dashboard.clerk.com/last-active?path=api-keys. (key=pk=_test_aGVscGZ1bC1tdWxsZXQtNzkuY2xlcmsuYWNjb3VudHMuZGV2JA)] {
+  digest: '558633246'
+}
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⨯ [Error: Publishable key not valid.]
+ ⨯ [Error: Publishable key not valid.]
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⨯ [Error: Publishable key not valid.]
+ ✓ Compiled in 3.3s (1380 modules)
+ ⨯ [Error: Publishable key not valid.]
+ ⨯ [Error: Publishable key not valid.]
+ GET / 404 in 13ms
+ ⨯ [Error: @clerk/clerk-react: The publishableKey passed to Clerk is invalid. You can get your Publishable key at https://dashboard.clerk.com/last-active?path=api-keys. (key=pk=_test_aGVscGZ1bC1tdWxsZXQtNzkuY2xlcmsuYWNjb3VudHMuZGV2JA)] {
+  digest: '558633246'
+}
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 1149ms (724 modules)
+ GET /favicon.ico 200 in 1367ms
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
