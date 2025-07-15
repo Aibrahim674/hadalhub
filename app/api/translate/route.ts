@@ -1,61 +1,46 @@
-// app/api/translate/route.ts
-import { NextResponse } from 'next/server';
-import { franc } from 'franc';
-import OpenAI from 'openai';
-import { currentUser } from '@clerk/nextjs/server';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { OpenAI } from "openai";
+import { currentUser } from "@clerk/nextjs";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY!,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 export async function POST(request: Request) {
   try {
-    const user = await currentUser(); // Get current Clerk user
+    const user = await currentUser();
     const body = await request.json();
     const input = body.text;
-    const direction = body.direction || 'auto';
+    const direction = body.direction || "auto";
 
-    if (!input) {
-      return NextResponse.json({ error: 'Text input required.' }, { status: 400 });
+    if (!input || typeof input !== "string") {
+      return new Response(JSON.stringify({ error: "No input provided." }), { status: 400 });
     }
 
-    const langCode = franc(input);
-    const isSomali = direction === 'so-en' || (direction === 'auto' && langCode === 'som');
+    // Build system prompt based on direction
+    const systemPrompt = {
+      "so-en": "You are a Somali-English translator. Translate Somali input into fluent, grammatically correct English. Only reply with the translated sentence.",
+      "en-so": "You are a Somali-English translator. Translate English input into accurate, culturally appropriate Somali. Only reply with the translated sentence.",
+      "auto": "You are a Somali-English translator. Detect the input language and translate accordingly between Somali and English. Ensure correct grammar and context. Only reply with the translated sentence.",
+    }[direction];
 
-    const systemPrompt = isSomali
-      ? 'You are a professional Somali-English translator. Translate the Somali text into formal and accurate English.'
-      : 'You are a professional English-Somali translator. Translate the English text into formal Somali.';
-
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4-turbo',
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4-turbo",
       messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: input },
+        { role: "system", content: systemPrompt },
+        { role: "user", content: input },
       ],
+      temperature: 0.4,
     });
 
-    const translatedText = response.choices[0]?.message?.content?.trim();
+    const translatedText = completion.choices[0].message.content;
 
-    if (!translatedText) {
-      return NextResponse.json({ error: 'Translation failed' }, { status: 500 });
-    }
-
-    // ✅ Save to Firebase if user is logged in
-    if (user) {
-      await addDoc(collection(db, 'translations'), {
-        userId: user.id,
-        original: input,
-        result: translatedText,
-        direction,
-        createdAt: serverTimestamp(),
-      });
-    }
-
-    return NextResponse.json({ translatedText });
+    return new Response(JSON.stringify({ translatedText }), {
+      status: 200,
+    });
   } catch (err: any) {
-    console.error('Translation API error:', err);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    console.error("Translation API error:", err);
+    return new Response(JSON.stringify({ error: "Translation failed." }), {
+      status: 500,
+    });
   }
 }
